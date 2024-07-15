@@ -39,9 +39,9 @@ Codes for experiments
 ********************
 
   
-  - "evaluate_memory_footprints": Codes for evaluating memory footprints
+  - "evaluate_memory_footprints.py": Codes for evaluating memory footprints
 
-  - "evaluate_update_performance": Codes for evaluating update performances
+  - "evaluate_update_performance.py": Codes for evaluating update performances
     
-  - "evaluate_query_performance": Codes for evaluating query performances
+  - "evaluate_query_performance.py": Codes for evaluating query performances
   
