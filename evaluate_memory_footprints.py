@@ -30,15 +30,10 @@ def order(a, b):
 if __name__ == '__main__':
     sys.setrecursionlimit(50000000)
     sanity_check = True  # True: switch on the sanity check; False: swith off the sanity check.
-    # test_case = sys.argv[1]
     test_cases = ['star_graph', 'path_graph', 'complete_graph', 'random_graph', 'power_law', 'usa', 'youtube', 'stackoverflow']
     methods = ['Dtree', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT']
-    edge_num = 10000000
     for test_case in test_cases:
         for method in methods:
-
-            if test_case == 'path_graph' and method == 'Dtree':
-                continue
             print(test_case, edge_num, method)
             load_parameter("%s_%d" %(test_case, edge_num))
 

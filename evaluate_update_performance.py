@@ -23,7 +23,7 @@ global n
 if __name__ == '__main__':
     sys.setrecursionlimit(50000000)
     method = sys.argv[1]  # the data structure to be evaluated
-    sanity_check = False  # True: switch on the sanity check; False: swith off the sanity check.
+    sanity_check = True  # True: switch on the sanity check; False: swith off the sanity check.
     graph_types = ['star_graph', 'path_graph', 'random_graph', 'complete_graph', 'power_law', 'usa', 'youtube', 'stackoverflow']
     ratios = [1000, 100, 20, 10, 5]  # ur = |insertion| / |deletion|, the reverse of u_r
 

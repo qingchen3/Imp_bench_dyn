@@ -1,18 +1,8 @@
-import sys, math
-from _collections import defaultdict
 from ST import ST_utils
-from STV import STV_utils
-from utils import graph_utils
 from Dtree import Dtree_utils
 from timeit import default_timer as timer
 from Class.Res import Res
 from utils.IO import printRes, update_res_query
-import HK.updates as HKupdate
-import HDT.updates as HDTupdate
-import HKS.updates as HKSupdate
-from LTV import LTV_utils
-from LT import LT_utils
-from LzT import LzT_utils
 from utils import tree_utils
 from utils.graph_utils import load_parameter
 import gc
