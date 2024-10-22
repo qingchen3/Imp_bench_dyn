@@ -14,7 +14,7 @@ and [lazy local trees LzT](https://dl.acm.org/doi/10.1145/335305.335345).
 Memory footprints, update performances and query performances are evaluated for all above data structures.  
 Source codes for implementing the data structures and running our experiments are  included in this repository. 
 
-[**Project Structure**](#project-structure) | [**Prerequisites**](#prerequisites) | [**Get Started**](#get-start) | [**Reproduce**](#Reproduce)
+[**Project Structure**](#project-structure) | [**Prerequisites**](#prerequisites) | [**Get Started**](#get-started) | [**Reproduce**](#reproduce)
 
 
 ## Project Structure
