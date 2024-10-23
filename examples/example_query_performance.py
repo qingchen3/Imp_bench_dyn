@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(1, '../')
 from ST import ST_utils
 from Dtree import Dtree_utils
 from timeit import default_timer as timer
@@ -37,14 +39,14 @@ if __name__ == '__main__':
             v_set = set()
             #edges_num = 0
 
-            workloads_reader = open("workloads/%s_ratio_%d" % (test_case, ratio), 'r')
+            workloads_reader = open("../workloads/%s_ratio_%d" % (test_case, ratio), 'r')
             test_points = 100
             test_size = len(workloads_reader.readlines()) // test_points
             test_query = False
             insertion_res = 0
             deletion_res = 0
             current_operation_id = 0
-            workloads_reader = open("workloads/%s_ratio_%d" % (test_case, ratio), 'r')
+            workloads_reader = open("../workloads/%s_ratio_%d" % (test_case, ratio), 'r')
             for line in workloads_reader.readlines():  # updates
                 items = line.rstrip().split(" ")
                 if items[0] == "ins":  # insertions
@@ -132,6 +134,8 @@ if __name__ == '__main__':
                         graph_label = "USA"
                     elif test_case == "SC":
                         graph_label = "SC"
+                    elif test_case == "fb":
+                        graph_label = "FB"
                     else:
                         raise ValueError("Wrong dataset")
 

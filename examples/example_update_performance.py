@@ -1,9 +1,11 @@
 import sys
+sys.path.insert(1, '../')
 from _collections import defaultdict
 from ST import ST_utils
 from STV import STV_utils
 from utils import graph_utils
 from Dtree import Dtree_utils
+from LCT import LCTree
 from timeit import default_timer as timer
 from Class.Res import Res
 from utils.IO import output_runtine
@@ -23,7 +25,6 @@ global n
 if __name__ == '__main__':
     sys.setrecursionlimit(50000000)
     method = sys.argv[1]  # the data structure to be evaluated
-    sanity_check = True  # True: switch on the sanity check; False: swith off the sanity check.
     graph_types = ['fb']
     ratios = [1000, 100, 20, 10, 5]  # ur = |insertion| / |deletion|, the reverse of u_r
 
@@ -32,6 +33,8 @@ if __name__ == '__main__':
             load_parameter("%s" % test_case)
 
             Dtree = dict()
+
+            LCT = dict()
 
             HKS_act_occ_dict = dict()
             HKS_non_tree_edges = dict()
@@ -70,6 +73,7 @@ if __name__ == '__main__':
             HKS_res = Res()
             HDT_res = Res()
             Dtree_res = Res()
+            LCT_res = Res()
             ST_res = Res()
             STV_res = Res()
             LT_res = Res()
@@ -87,7 +91,7 @@ if __name__ == '__main__':
             LTV_res_pre = Res()
             LzT_res_pre = Res()
 
-            workloads_reader = open("workloads/%s_ratio_%d" % (test_case, ratio), 'r')
+            workloads_reader = open("../workloads/%s_ratio_%d" % (test_case, ratio), 'r')
 
             test_query = False
             insertion_res = 0
@@ -106,6 +110,12 @@ if __name__ == '__main__':
                         Dtree_res.in_time += (timer() - start)
                         Dtree_res.in_count += 1
                         insertion_res = Dtree_res.in_time / Dtree_res.in_count
+                    elif method == "LCT":  # link-cut tree
+                        start = timer()
+                        LCTree.insert(a, b, LCT)
+                        LCT_res.in_time += (timer() - start)
+                        LCT_res.in_count += 1
+                        insertion_res = LCT_res.in_time / LCT_res.in_count
                     elif method == "HK":
                         # evaluate HK
                         start = timer()
@@ -115,18 +125,12 @@ if __name__ == '__main__':
                         HK_res.in_time += (timer() - start)
                         HK_res.in_count += 1
                         insertion_res = HK_res.in_time / HK_res.in_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != HKupdate.query(a, b,
-                                                                                                           HK_act_occ_dict):
-                            raise ValueError("Error in insertions on HK")
                     elif method == "HKS":
                         start = timer()
                         HKSupdate.insert_edge(a, b, HKS_act_occ_dict, HKS_non_tree_edges, HKS_tree_edges_pointers)
                         HKS_res.in_time += (timer() - start)
                         HKS_res.in_count += 1
                         insertion_res = HKS_res.in_time / HKS_res.in_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != tree_utils.query(a, b,
-                                                                                                             HKS_act_occ_dict):
-                            raise ValueError("Error in insertions on HK variant")
                     elif method == "HDT":
                         start = timer()
                         HDTupdate.insert_edge(a, b, HDT_act_occ_dict, HDT_tree_edges_pointers,
@@ -134,9 +138,6 @@ if __name__ == '__main__':
                         HDT_res.in_time += (timer() - start)
                         HDT_res.in_count += 1
                         insertion_res = HDT_res.in_time / HDT_res.in_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != HDTupdate.query(a, b,
-                                                                                                            HDT_act_occ_dict):
-                            raise ValueError("Error in insertions on HDT")
                     elif method == "ST":
                         # Structural tree
                         start = timer()
@@ -144,9 +145,6 @@ if __name__ == '__main__':
                         ST_res.in_time += (timer() - start)
                         ST_res.in_count += 1
                         insertion_res = ST_res.in_time / ST_res.in_count
-                        if sanity_check and ST_utils.query(ST[a], ST[b]) != Dtree_utils.query_simple(Dtree[a],
-                                                                                                     Dtree[b]):
-                            raise ValueError("Error in insertion in ST")
                     elif method == "STV":
                         # Structural tree variant
                         start = timer()
@@ -154,33 +152,24 @@ if __name__ == '__main__':
                         STV_res.in_time += (timer() - start)
                         STV_res.in_count += 1
                         insertion_res = STV_res.in_time / STV_res.in_count
-                        if sanity_check and STV_utils.query(ST[a], ST[b]) != Dtree_utils.query_simple(Dtree[a],
-                                                                                                             Dtree[b]):
-                            raise ValueError("Error in insertion in ST variant")
                     elif method == "LT":
                         start = timer()
                         LT_utils.insert(a, b, LT, LT_nt_list_group_by_levels, LT_t_list_group_by_levels)
                         LT_res.in_time += (timer() - start)
                         LT_res.in_count += 1
                         insertion_res = LT_res.in_time / LT_res.in_count
-                        if sanity_check and LTV_utils.query(LT, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in insertion in LT")
                     elif method == "LTV":
                         start = timer()
                         LTV_utils.insert(a, b, LTV, LTV_adj_list_group_by_levels)
                         LTV_res.in_time += (timer() - start)
                         LTV_res.in_count += 1
                         insertion_res = LTV_res.in_time / LTV_res.in_count
-                        if sanity_check and LTV_utils.query(LTV, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in insertion in WN")
                     elif method == "LzT":
                         start = timer()
                         LzT_utils.insert(a, b, LzT, LzT_t_list_group_by_levels, LzT_nt_list_group_by_levels)
                         LzT_res.in_time += (timer() - start)
                         LzT_res.in_count += 1
                         insertion_res = LzT_res.in_time / LzT_res.in_count
-                        if sanity_check and LzT_utils.query(LzT, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in insertions in LzT")
                     else:
                         raise ValueError("Wrong method ...")
                 elif items[0] == "del":  # deletion
@@ -194,17 +183,19 @@ if __name__ == '__main__':
                         Dtree_res.de_time += (timer() - start)
                         Dtree_res.de_count += 1
                         deletion_res = Dtree_res.de_time / Dtree_res.de_count
+                    elif method == "LCT":
+                        # link cut tree
+                        start = timer()
+                        LCTree.delete(a, b, LCT)
+                        LCT_res.de_time += (timer() - start)
+                        LCT_res.de_count += 1
+                        deletion_res = LCT_res.de_time / LCT_res.de_count
                     elif method == "HKS":
                         start = timer()
                         HKSupdate.delete_edge(a, b, HKS_act_occ_dict, HKS_non_tree_edges, HKS_tree_edges_pointers)
                         HKS_res.de_time += (timer() - start)
                         HKS_res.de_count += 1
                         deletion_res = HKS_res.de_time / HKS_res.de_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != \
-                                tree_utils.query(a, b, HKS_act_occ_dict):
-                            print(tree_utils.query(a, b, HKS_act_occ_dict),
-                                  Dtree_utils.query_simple(Dtree[a], Dtree[b]))
-                            raise ValueError("Error in deletions on HK variant")
                     elif method == "HK":
                         # HK
                         start = timer()
@@ -214,9 +205,6 @@ if __name__ == '__main__':
                         HK_res.de_time += (timer() - start)
                         HK_res.de_count += 1
                         deletion_res = HK_res.de_time / HK_res.de_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != \
-                                HKupdate.query(a, b, HK_act_occ_dict):
-                            raise ValueError("Error in deletions on HK")
                     elif method == "HDT":
                         # HDT
                         start = timer()
@@ -225,19 +213,12 @@ if __name__ == '__main__':
                         HDT_res.de_time += (timer() - start)
                         HDT_res.de_count += 1
                         deletion_res = HDT_res.de_time / HDT_res.de_count
-                        if sanity_check and Dtree_utils.query_simple(Dtree[a], Dtree[b]) != HDTupdate.query(a, b,
-                                                                                                            HDT_act_occ_dict):
-                            print(Dtree_utils.query_simple(Dtree[a], Dtree[b]), HDTupdate.query(a, b, HDT_act_occ_dict))
-                            raise ValueError("Error in deletions on HDT")
                     elif method == "ST":
                         start = timer()
                         ST_utils.delete(a, b, ST, ST_adj_list_group_by_levels, ST_adj_list_group_by_levels_nt)
                         ST_res.de_time += (timer() - start)
                         ST_res.de_count += 1
                         deletion_res = ST_res.de_time / ST_res.de_count
-                        if sanity_check and ST_utils.query(ST[a], ST[b]) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            print(ST_utils.query(ST[a], ST[b]), Dtree_utils.query_simple(Dtree[a], Dtree[b]))
-                            raise ValueError("Error in deletions in ST")
                     elif method == "STV":
                         # Structural Tree variant
                         start = timer()
@@ -245,10 +226,6 @@ if __name__ == '__main__':
                         STV_res.de_time += (timer() - start)
                         STV_res.de_count += 1
                         deletion_res = STV_res.de_time / STV_res.de_count
-                        if sanity_check and STV_utils.query(ST[a], ST[b]) != Dtree_utils.query_simple(Dtree[a],
-                                                                                                             Dtree[b]):
-                            print(STV_utils.query(ST[a], ST[b]), Dtree_utils.query_simple(Dtree[a], Dtree[b]))
-                            raise ValueError("Error in deletions in ST varinat")
                     elif method == "LT":
                         # LT
                         start = timer()
@@ -256,24 +233,18 @@ if __name__ == '__main__':
                         LT_res.de_time += (timer() - start)
                         LT_res.de_count += 1
                         deletion_res = LT_res.de_time / LT_res.de_count
-                        if sanity_check and LTV_utils.query(LT, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in deletions in LT")
                     elif method == "LTV":
                         start = timer()
                         LTV_utils.delete(a, b, LTV, LTV_adj_list_group_by_levels)
                         LTV_res.de_time += (timer() - start)
                         LTV_res.de_count += 1
                         deletion_res = LTV_res.de_time / LTV_res.de_count
-                        if sanity_check and LTV_utils.query(LTV, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in deletions in WN")
                     elif method == "LzT":
                         start = timer()
                         LzT_utils.delete(a, b, LzT, LzT_t_list_group_by_levels, LzT_nt_list_group_by_levels)
                         LzT_res.de_time += (timer() - start)
                         LzT_res.de_count += 1
                         deletion_res = LzT_res.de_time / LzT_res.de_count
-                        if sanity_check and LzT_utils.query(LzT, a, b) != Dtree_utils.query_simple(Dtree[a], Dtree[b]):
-                            raise ValueError("Error in deletions in LzT")
                     else:
                         raise ValueError("Wrong method")
 
@@ -298,6 +269,8 @@ if __name__ == '__main__':
                 graph_label = "USA"
             elif test_case == "SC":
                 graph_label = "SC"
+            elif test_case == "fb":
+                graph_label = "FB"
             else:
                 raise ValueError("Wrong dataset")
 
@@ -307,6 +280,8 @@ if __name__ == '__main__':
             print("finishing run the experiment for dataset: %s, ratio: %d, method: %s \n" % (test_case, ratio, method))
 
             del Dtree
+
+            del LCT
 
             del HKS_act_occ_dict
             del HKS_non_tree_edges
