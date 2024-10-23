@@ -356,7 +356,7 @@ def cal_node_edge_size(node):
 
 
 def cal_total_memory_use(Dtree):
-    print("memory size for Dtree dictionary: %d bytes" % sys.getsizeof(Dtree))
+    #print("memory size for Dtree dictionary: %d bytes" % sys.getsizeof(Dtree))
     space_n = 0
     space_e = 0
     for key, node in Dtree.items():

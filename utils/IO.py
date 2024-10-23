@@ -459,7 +459,7 @@ def output_memory_footprint(testcase, method, data, u_r):  # output space_n and 
 
 def output_memory_footprint_sum(testcase, method, data, u_r):  # output space = space_n + space_e
     # data is in the form: [method, memory_footprint for space_n, memory footprint for space_e]
-    if method not in ['Dtree', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT']:
+    if method not in ['Dtree', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT', 'LCT']:
         raise ValueError('unknown method')
 
     if not os.path.exists('./res/memory'):
@@ -502,6 +502,10 @@ def update_res_query(testcase, result_type, data, ratio, method):
         index = 1
     elif method == 'ST':
         index = 2
+    elif method == 'HKS':
+        index = 3
+    elif method == 'LCT':
+        index = 4
     else:
         raise ValueError('method no concerned')
 
@@ -515,7 +519,7 @@ def update_res_query(testcase, result_type, data, ratio, method):
 
     if not Path(filename).exists():
         writer = open(filename, 'w')
-        writer.write('no,Dtree,ST\n')
+        writer.write('no,Dtree,ST,HKS,LCT\n')
         writer.flush()
         writer.close()
 
@@ -542,7 +546,7 @@ def update_res_query(testcase, result_type, data, ratio, method):
                 writer.writerow(row)
             latest_idx = int(row[0])
         if latest_idx < current_idx:
-            items = [current_idx, 0, 0]
+            items = [current_idx, 0, 0, 0, 0]
             items[index] = res
             writer.writerow(items)
 
@@ -551,7 +555,7 @@ def update_res_query(testcase, result_type, data, ratio, method):
 
 
 def output_runtine(graph_label, method, operation, ratio, data):
-    if method not in ['Dtree', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT']:
+    if method not in ['Dtree', 'LCT', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT']:
         raise ValueError('unknown method')
     if operation != 'insertions' and operation != 'deletions':
         raise ValueError('invalid input for operations')
@@ -575,6 +579,8 @@ def output_runtine(graph_label, method, operation, ratio, data):
         method_index = 8
     elif method == 'LzT':
         method_index = 9
+    elif method == 'LCT':
+        method_index = 10
     else:
         raise ValueError('unknown method')
 
@@ -585,16 +591,16 @@ def output_runtine(graph_label, method, operation, ratio, data):
 
     if not Path(filename).exists():
         writer = open(filename, 'w')
-        writer.write('Graph,Dtree,HKS,HK,HDT,ST,STV,LT,LTV,LzT\n')
-        writer.write('SG,0,0,0,0,0,0,0,0,0\n')
-        writer.write('PG,0,0,0,0,0,0,0,0,0\n')
-        writer.write('CG,0,0,0,0,0,0,0,0,0\n')
-        writer.write('RG,0,0,0,0,0,0,0,0,0\n')
-        writer.write('PL,0,0,0,0,0,0,0,0,0\n')
-        writer.write('YT,0,0,0,0,0,0,0,0,0\n')
-        writer.write('ST,0,0,0,0,0,0,0,0,0\n')
-        writer.write('USA,0,0,0,0,0,0,0,0,0\n')
-        writer.write('TK,0,0,0,0,0,0,0,0,0\n')
+        writer.write('Graph,Dtree,HKS,HK,HDT,ST,STV,LT,LTV,LzT,LCT\n')
+        writer.write('SG,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('PG,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('CG,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('RG,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('PL,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('YT,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('ST,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('USA,0,0,0,0,0,0,0,0,0,0\n')
+        writer.write('EN,0,0,0,0,0,0,0,0,0,0\n')
         writer.flush()
         writer.close()
     assert Path(filename).exists()

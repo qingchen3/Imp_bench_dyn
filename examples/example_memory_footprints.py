@@ -37,7 +37,7 @@ if __name__ == '__main__':
     methods = ['Dtree', 'HKS', 'HK', 'HDT', 'ST', 'STV', 'LT', 'LTV', 'LzT', 'LCT']
     for test_case in test_cases:
         for method in methods:
-            print(test_case, method)
+            print("Evaluting %s on dataset %s" %(method, test_case))
             load_parameter(test_case)
 
             Dtree = dict()
@@ -99,7 +99,7 @@ if __name__ == '__main__':
             delimiter = ','
             insertions_reader = open("%s" %test_case, 'r')
 
-            if 'path_graph' and method == 'Dtree':
+            if test_case == 'path_graph' and method == 'Dtree':
                 edge_num = 10000000
 
                 print(test_case, edge_num, method)

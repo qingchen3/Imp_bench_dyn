@@ -26,6 +26,8 @@ def load_parameter(testcase):
         n = 2600000
     elif testcase == "enron":
         n = 870000
+    elif testcase == "fb":
+        n = 899
     elif "power_law" in testcase or "path" in testcase or "star" in testcase or "random" in testcase or "complete" in testcase:
         m = 10000000
         if "complete" in testcase:
@@ -36,7 +38,6 @@ def load_parameter(testcase):
             n = 10000000
     max_level = math.ceil(math.log(n, 2))
     return
-
 
 
 def loadGraph(testcase):
