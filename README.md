@@ -66,17 +66,21 @@ ___
     ```
 - Step 4:  Run experiments on fb datset
   
-    - Evaluating memory footprints:
+    - Evaluating memory footprints for all data structures on fb:
       ```commandline
-      python3 exmaple_memory_footprints.py fb
+      python3 exmaple_memory_footprints.py 
       ```
       
-    - Evaluating update performances:
+    - Evaluating update performance for one data strucutre on fb.
+  
+      Take Dtree as an example
       ```commandline
-      python3 example_update_performance.py fb
+      python3 example_update_performance.py Dtree
       ```
       
-    - Evaluating query performances:
+    - Evaluating query performance for one data strucutre on fb.
+
+      Take Dtree as an example
       ```commandline
       python3 example_query_performance.py fb
       ```
@@ -85,11 +89,12 @@ ___
 As dicussed in the paper, no data structure is robust. When running holistic evaluations, there are two types of errors.
 
 - Run out of memory. Only D-tree can finish the workloads on SC, and all other data structures run out of memory.
-- Run out of time. Experiments can take extremely long time to finish.
+- Run out of time. Experiments can take an extremely long time to finish.
 
  Run experiments shown in the paper:
   
 - Evaluating memory footprints:
+
   ```commandline
   python3 evaluate_memory_footprints.py
   ```
@@ -102,7 +107,7 @@ As dicussed in the paper, no data structure is robust. When running holistic eva
 - Evaluating query performances:
   ```commandline
   python3 evaluate_query_performance.py
-
+  ```
 
 ## Report issuse
 Please free to report any issues (it is easier to discuss through github if you have technical issues related to codes 
