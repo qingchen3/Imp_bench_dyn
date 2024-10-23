@@ -14,7 +14,7 @@ and [lazy local trees LzT](https://dl.acm.org/doi/10.1145/335305.335345).
 Memory footprints, update performances and query performances are evaluated for all above data structures.  
 Source codes for implementing the data structures and running our experiments are  included in this repository. 
 
-[**Project Structure**](#project-structure) | [**Prerequisites**](#prerequisites) | [**Get Started**](#get-started) | [**Reproduce**](#reproduce) | [**Report issues**](#report-issues)
+[**Project Structure**](#project-structure) | [**Prerequisites**](#prerequisites) | [**Get Started**](#get-started) | [**Reproduce**](#reproduce) | [**Report Issues**](#report-issues)
 
 
 ## Project Structure
@@ -109,6 +109,6 @@ As dicussed in the paper, no data structure is robust. When running holistic eva
   python3 evaluate_query_performance.py
   ```
 
-## Report issuse
+## Report Issues
 Please free to report any issues (it is easier to discuss through github if you have technical issues related to codes 
 and datasets).
