@@ -8,7 +8,7 @@ We implement and emprically evaluate all major data structures for the dynamic c
 [structural tree ST](https://dl.acm.org/doi/10.1145/502090.502095), 
 [a variant STV of structural tree](https://dl.acm.org/doi/10.5555/2627817.2627943), 
 [local tree LT](https://dl.acm.org/doi/10.1145/335305.335345), 
-[a variant LTV of local tree]((https://dl.acm.org/doi/10.5555/2627817.2627943)), 
+[a variant LTV of local tree](https://dl.acm.org/doi/10.5555/2627817.2627943), 
 and [lazy local trees LzT](https://dl.acm.org/doi/10.1145/335305.335345). 
 
 Memory footprints, update performances and query performances are evaluated for all above data structures.  
