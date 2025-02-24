@@ -112,3 +112,27 @@ As dicussed in the paper, no data structure is robust. When running holistic eva
 ## Report Issues
 Please free to report any issues (it is easier to discuss through github if you have technical issues related to codes 
 and datasets).
+
+
+# Cite the paper 
+If you use or find this work interesting, please consider citing it.
+
+```
+@article{10.1145/3709660,
+author = {Chen, Qing and B\"{o}hlen, Michael H. and Helmer, Sven},
+title = {An Experimental Comparison of Tree-data Structures for Connectivity Queries on Fully-dynamic Undirected Graphs},
+year = {2025},
+issue_date = {February 2025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {3},
+number = {1},
+url = {https://doi.org/10.1145/3709660},
+doi = {10.1145/3709660},
+journal = {Proc. ACM Manag. Data},
+month = feb,
+articleno = {10},
+numpages = {26},
+keywords = {connectivity, data structure, dynamic graph, experimental study, spanning tree}
+}
+```
