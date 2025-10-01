@@ -48,7 +48,7 @@ ___
 - clone this repository
 - install dependencies: 
     ```bash
-    pip3 install -r requirements.text
+    pip3 install -r requirements.txt
     ```
 
 ## Get Started
