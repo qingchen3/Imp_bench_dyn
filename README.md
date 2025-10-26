@@ -46,14 +46,23 @@ ___
 - Debian GNU/Linux 12; 200 GB RAM + 80 swap memory
 - install Python3
 - clone this repository
+- create a virtual environment, named dyn_env, at the root folder of the repository 
+    ```bash
+    python3 -m -venv dyn_env
+    source dyn_env/bin/activate
+    pip3 install -r requirements.txt
+    ```
 - install dependencies: 
     ```bash
     pip3 install -r requirements.txt
     ```
-
 ## Get Started
 
 ### Run experiments on the  [fb-forum](https://networkrepository.com/fb-forum.php) dataset in **examples** folder to get started.
+- Step 0: activate dyn_env
+  ```bash
+    source dyn_env/bin/activate
+  ```
 - Step 1: go to examples folder
 - Step 2: run script
   ```commandline
