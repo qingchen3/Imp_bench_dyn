@@ -94,31 +94,14 @@ ___
       python3 example_query_performance.py fb
       ```
 
-## Reproduce 
+## Report Issues
+
 As dicussed in the paper, no data structure is robust. When running holistic evaluations, there are two types of errors.
 
 - Run out of memory. Only D-tree can finish the workloads on SC, and all other data structures run out of memory.
 - Run out of time. Experiments can take an extremely long time to finish.
 
- Run experiments shown in the paper:
-  
-- Evaluating memory footprints:
 
-  ```commandline
-  python3 evaluate_memory_footprints.py
-  ```
-  
-- Evaluating update performances:
-  ```commandline
-  python3 evaluate_update_performance.py
-  ```
-  
-- Evaluating query performances:
-  ```commandline
-  python3 evaluate_query_performance.py
-  ```
-
-## Report Issues
 Please free to report any issues (it is easier to discuss through github if you have technical issues related to codes 
 and datasets).
 
